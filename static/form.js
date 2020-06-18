@@ -23,35 +23,30 @@ $(function() {
         }
     );
     // generate
-    $(document).on(
-        'click',
-        '#generate-button',
-        function(e) {
-            e.preventDefault();
-            console.log("i've been clicked!")
-            var container = $('[data-role="dynamic-fields"]');
-            var listOfObjects = [];
-            container.children().each(function(){
-                let obj = {
-                    key: $(this).find('input#field-key').val(),
-                    title: $(this).find('input#field-title').val(),
-                    description: $(this).find('input#field-desc').val(),
-                    dependencies: $(this).find('input#field-dependencies').val(),
-                    start_date: $(this).find('input#field-start').val(),
-                    duration: $(this).find('input#field-duration').val(),
-                    resource: $(this).find('input#field-resource').val(),
-                }
-                listOfObjects.push(obj);
-            })
-            console.log("length of " + listOfObjects.length)
-            var data = {
-                title : "Gantt Chart",
-                items : listOfObjects
+    document.onkeyup = function(e) {
+        var container = $('[data-role="dynamic-fields"]');
+        var listOfObjects = [];
+        container.children().each(function(){
+            let obj = {
+                key: $(this).find('input#field-key').val(),
+                title: $(this).find('input#field-title').val(),
+                description: $(this).find('input#field-desc').val(),
+                dependencies: $(this).find('input#field-dependencies').val(),
+                start_date: $(this).find('input#field-start').val(),
+                duration: $(this).find('input#field-duration').val(),
+                resource: $(this).find('input#field-resource').val(),
             }
-            var encoded = JSON.stringify(data)
-            encoded = btoa(encoded);
-            $("#generatedBase").val(encoded);
+            listOfObjects.push(obj);
+        })
+        console.log("length of " + listOfObjects.length)
+        var data = {
+            title : "Gantt Chart",
+            items : listOfObjects
         }
-    );
+        var encoded = JSON.stringify(data)
+        encoded = btoa(encoded);
+        $("#generatedBase").val(encoded);
+        $("#generatedJSON").val(JSON.stringify(data));
+    }
 });
 
