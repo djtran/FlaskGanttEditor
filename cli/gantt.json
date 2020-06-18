@@ -1,0 +1,135 @@
+{
+    "title": "Alexa Entities P0 Project Plan",
+    "items": [
+        {
+            "key": "RC",
+            "title": "Runtime Contract",
+            "description": "Establish contract with BluER/Serco covering routing and differentiation of traffic.",
+            "dependencies": "",
+            "start_date": "3/16/2020",
+            "duration": 4,
+            "resource": "davtra",
+            "duplicate": false
+        },
+        {
+            "key": "Impl",
+            "title": "Implementation",
+            "description": "Enhancements to Indexer & SPI to support locale tokenization & postfiltering. SPI improvements with function score.",
+            "dependencies": "RC",
+            "start_date": "",
+            "duration": 17,
+            "resource": "davtra",
+            "duplicate": false
+        },
+        {
+            "key" : "Infra",
+            "title": "Data in S3 & AWS Infra Creation",
+            "description": "Stand up AWS resources, manually design and create the indices, have test data in S3 from Alexa Entities",
+            "dependencies": "",
+            "start_date": "3/16/2020",
+            "duration": 14,
+            "resource": "davtra, nikhin",
+            "duplicate": false
+        },
+        {
+            "key":"FirstType1",
+            "title": "Onboarding the first type",
+            "description": "Indexer & Search configurations for the first built in type we have data for. Leonardo AuthoritySource configuration. Connectivity testing, basic tests & validation. AuthoritySource config deployed in Beta.",
+            "dependencies": "Impl,Infra",
+            "start_date": "",
+            "duration": 7,
+            "resource": "davtra",
+            "duplicate": false
+        },
+        {
+            "key":"FirstType2",
+            "title": "Onboarding the first type",
+            "description": "Indexer & Search configurations for the first built in type we have data for. Leonardo AuthoritySource configuration. Connectivity testing, basic tests & validation. AuthoritySource config deployed in Beta.",
+            "dependencies": "DavidOncall",
+            "start_date": "",
+            "duration": 7,
+            "resource": "davtra",
+            "duplicate": true
+        },
+        {
+            "key" : "FourTypes1",
+            "title": "Onboarding the other 4 types",
+            "description": "Bundle configs for the next 4 reMARS types, adjustments to the Leonardo AuthoritySource configuration. Extensions to the tests and validation. Assistance from David, but largely self-service by Nikhil.",
+            "dependencies": "FirstType1, NikhilOncall1",
+            "start_date": "",
+            "duration": 15,
+            "resource": "nikhin",
+            "duplicate": false
+        },
+        {
+            "key" : "FourTypes2",
+            "title": "Onboarding the other 4 types",
+            "description":"",
+            "dependencies": "NikhilOncall2",
+            "start_date": "",
+            "duration": 6,
+            "resource": "nikhin",
+            "duplicate": true
+        },
+        {
+            "key" : "ProdOne",
+            "title": "First Type - Prod Rollout & Testing",
+            "description": "Popularity & locale configurations completed. Testing through Prod. NLUConsole output confirmed. Catalog fully ingested for the first type.",
+            "dependencies": "FirstType2",
+            "start_date": "",
+            "duration": 14,
+            "resource": "davtra",
+            "duplicate": false
+        },
+        {
+            "key": "ProdTwo",
+            "title": "Overall Prod Rollout & Testing",
+            "description": "Testing through Prod. NLUConsole output confirmed. Catalog fully ingested for the five types.",
+            "dependencies": "FourTypes2,ProdOne",
+            "start_date": "",
+            "duration": 14,
+            "resource": "davtra, nikhin",
+            "duplicate": false
+        },
+        {
+            "key": "Handoff",
+            "title": "Handoff & Buffer",
+            "description": "Additional fixes or adjustments are handled. Other types are onboarded self-service by Nikhil.",
+            "dependencies": "ProdTwo",
+            "start_date": "",
+            "duration": 21,
+            "resource": "davtra, nikhin",
+            "duplicate": false
+        },
+        {
+            "key": "DavidOncall",
+            "title": "David Oncall",
+            "description": "Unavailable for work",
+            "dependencies": "FirstType1",
+            "start_date": "4/13/2020",
+            "duration": 7,
+            "resource": "davtra",
+            "duplicate": true
+        },
+        {
+            "key": "NikhilOncall1",
+            "title": "Nikhil Oncall",
+            "description": "Unavailable for work",
+            "dependencies": "Infra",
+            "start_date": "03/31/2020",
+            "duration": 7,
+            "resource": "nikhin",
+            "duplicate": true
+        },
+        {
+            "key": "NikhilOncall2",
+            "title": "Nikhil Oncall",
+            "description": "Unavailable for work",
+            "dependencies": "FourTypes1",
+            "start_date": "04/28/2020",
+            "duration": 7,
+            "resource": "nikhin",
+            "duplicate": true
+        }
+    ]
+}

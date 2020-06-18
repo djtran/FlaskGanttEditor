@@ -1,0 +1,60 @@
+<!doctype html>
+<head>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="static/default.css">
+    <script src="static/form.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="theForm" data-role="dynamic-fields">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label class="sr-only" for="field-key">id</label>
+                        <input type="text" class="form-control" id="field-key" placeholder="id">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="field-title">title</label>
+                        <input type="text" class="form-control" id="field-title" placeholder="Issue Title">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="field-desc">description</label>
+                        <input type="text" class="form-control" id="field-desc" placeholder="Issue Description">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="field-dependencies">dependencies</label>
+                        <input type="text" class="form-control" id="field-dependencies" placeholder="Issue dependencies (comma separated IDs)">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="field-start">start date</label>
+                        <input type="text" class="form-control" id="field-start" placeholder="Issue start date">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="field-duration">duration</label>
+                        <input type="text" class="form-control" id="field-duration" placeholder="Issue duration">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="field-resource">resource</label>
+                        <input type="text" class="form-control" id="field-resource" placeholder="Engineer(s)">
+                    </div>
+                    <button class="btn btn-danger" data-role="remove">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                    <button class="btn btn-primary" data-role="add">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </div>  <!-- /div.form-inline -->
+            </div>  <!-- /div[data-role="dynamic-fields"] -->
+            <button class="btn btn-success" id="generate-button"> Generate </button>
+            <label for="generatedBase">View at localhost:5000/render/base64encodedString</base64encodedString></label>
+            <textarea id="generatedBase" name="generatedBase">
+
+            </textarea>
+        </div>  <!-- /div.col-md-12 -->
+    </div>  <!-- /div.row -->
+</div>
+</body>
+</html>

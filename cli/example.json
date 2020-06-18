@@ -1,0 +1,32 @@
+{
+    "title": "Example Gantt",
+    "items": [
+        {
+            "key": "foo",
+            "title": "first activity",
+            "description": "activity stuff",
+            "dependencies": "",
+            "start_date": "4/20/2000",
+            "duration": 7,
+            "resource": "David"
+        },
+        {
+            "key": "bar",
+            "title": "dependent activity",
+            "description": "activity stuff that builds on the first one",
+            "dependencies": "foo",
+            "start_date": "",
+            "duration": 7,
+            "resource": "David"
+        },
+        {
+            "key": "other",
+            "title": "some other activity",
+            "description": "related yet unrelated",
+            "dependencies": "",
+            "start_date": "4/20/2000",
+            "duration": 14,
+            "resource": "Not David"
+        }
+    ]
+}

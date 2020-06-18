@@ -1,49 +1,46 @@
-from flask import Flask, render_template, request
-import base64, json
-app = Flask(__name__)
+# EXAMPLE
+#
+# python json-based-gantt.py -f gantt.json
+#
 
-@app.route('/')
-def home():
-    return render_template('index.html')
+import os, sys, json, argparse
 
-@app.route('/render/<base64encodedjson>')
-def render(base64encodedjson):
-    decodedString = base64.b64decode(base64encodedjson).decode('utf-8')
-    print(decodedString);
-    return generate_gantt(decodedString)
+def main():
+	parser = argparse.ArgumentParser()
+	parser.add_argument('-f','--file', help='<Required> File containing your gantt description', default=None, required=True)
+	args = parser.parse_args()
 
+	file = args.file
+        with open(file) as f:
+            data = json.load(f);
+            page_title = data['title']
+	    table_string = ""
+    	    graph_string = ""
+            for item in data['items']:
+                id = item['key']
 
-def generate_gantt(decodedString):
-  data = json.loads(decodedString);
-  page_title = data['title']
-  table_string = ""
-  graph_string = ""
-  for item in data['items']:
-    id = item['key']
-
-    # if not item['duplicate']:
-    if True:
-      list_item = """<tr><th scope="row"><span id="%s">%s</span></th><td>%s</td><td>%s</td></tr>""" % (id, item['title'], item['title'], str(item['description']))
-      table_string = table_string + list_item + '\n'
-
-    duration = item['duration']
-    percent_complete = 0
-    start_date = "null"
-    if item['start_date']:
-      start_date = """new Date("%s")""" % (item['start_date'])
-
-    dependencies = "\'" + item['dependencies'] + "\'"
-    if dependencies == "":
-      dependencies = "null"
-    resource = item['resource']
-    # task id, task name, resource, start date, end date, duration, percent_complete dependencies
-    graph_item = """['%s', '%s', '%s', %s, null, daysToMilliseconds(%s), %s, %s],""" % (id, item['title'], resource, start_date, duration, percent_complete, dependencies)
-    graph_string = graph_string + graph_item + '\n'
-
-  graph_string = graph_string.rstrip(",\n")
-  graph_height = 45 + 42 * len(data['items'])
-  graph_height = "\"" + str(graph_height) + "\""
-  html = """<html>
+                if not item['duplicate']:
+                    list_item = """<tr><th scope="row"><span id="%s">%s</span></th><td>%s</td><td>%s</td></tr>""" % (id, item['title'], item['title'], str(item['description']))
+                    table_string = table_string + list_item + '\n'
+ 
+                duration = item['duration']
+                percent_complete = 0
+                start_date = "null"
+                if item['start_date']:
+                    start_date = """new Date("%s")""" % (item['start_date'])
+ 
+                dependencies = "\'" + item['dependencies'] + "\'"
+                if dependencies == "":
+                        dependencies = "null"
+                resource = item['resource']
+                # task id, task name, resource, start date, end date, duration, percent_complete dependencies
+                graph_item = """['%s', '%s', '%s', %s, null, daysToMilliseconds(%s), %s, %s],""" % (id, item['title'], resource, start_date, duration, percent_complete, dependencies)
+                graph_string = graph_string + graph_item + '\n'
+     
+            graph_string = graph_string.rstrip(",\n")
+    	    graph_height = 45 + 42 * len(data['items'])
+    	    graph_height = "\"" + str(graph_height) + "\""
+            html = """<html>
     <head>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans" />
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -151,4 +148,7 @@ def generate_gantt(decodedString):
       </div>
     </body>
     </html>"""
-  return html
+            print html
+ 
+if __name__ == '__main__':
+  main()
