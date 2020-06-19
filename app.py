@@ -21,11 +21,6 @@ def generate_gantt(decodedString):
   for item in data['items']:
     id = item['key']
 
-    # if not item['duplicate']:
-    if True:
-      list_item = """<tr><th scope="row"><span id="%s">%s</span></th><td>%s</td><td>%s</td></tr>""" % (id, item['title'], item['title'], str(item['description']))
-      table_string = table_string + list_item + '\n'
-
     duration = item['duration']
     percent_complete = 0
     start_date = "null"
@@ -39,6 +34,12 @@ def generate_gantt(decodedString):
     # task id, task name, resource, start date, end date, duration, percent_complete dependencies
     graph_item = """['%s', '%s', '%s', %s, null, daysToMilliseconds(%s), %s, %s],""" % (id, item['title'], resource, start_date, duration, percent_complete, dependencies)
     graph_string = graph_string + graph_item + '\n'
+
+    # if not item['duplicate']:
+    if True:
+      list_item = """<tr><th scope="row"><span id="%s">%s</span></th><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>""" % (id, item['key'], item['title'], str(item['description']), dependencies, str(duration), resource)
+      table_string = table_string + list_item + '\n'
+
 
   graph_string = graph_string.rstrip(",\n")
   graph_height = 45 + 42 * len(data['items'])
@@ -139,9 +140,12 @@ def generate_gantt(decodedString):
         <table class="table">
           <thead class="thead-dark">
             <tr>
-              <th scope="col">Title</th>
+              <th scope="col">Key</th>
               <th scope="col">Title</th>
               <th scope="col">Description</th>
+              <th scope="col">Dependencies</th>
+              <th scope="col">Duration in Days</th>
+              <th scope="col">Resource</th>
             </tr>
           </thead>
           <tbody>
