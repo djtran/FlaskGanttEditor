@@ -9,6 +9,26 @@
 <body>
 <div class="container" style="width: 1700px;">
     <div class="row">
+        <div class="form-group col-xl-12">
+            <label for="exampleFormControlFile1">Reload From JSON File</label>
+            <input type="file" class="form-control-file" id="jsonReloadFile">
+            <br>
+            <button class="btn btn-success" id="import-file" onclick="importFromFile()"> Import </button>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-xl-12">
+            <h1>Gantt Chart Generator</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <input type="text" class="form-control" id="titleText" placeholder="Chart Title">
+        </div>
+    </div>
+    <hr>
+    <div class="row">
         <div class="col-xl-12">
             <div id="theForm" data-role="dynamic-fields">
                 <div class="form-inline">
@@ -48,23 +68,18 @@
                     </button>
                 </div>  <!-- /div.form-inline -->
             </div>  <!-- /div[data-role="dynamic-fields"] -->
-            <hr>
-            <button class="btn btn-success" id="generate-button"> Generate </button>
             <br>
-            <strong>View at localhost:5000/render/base64encodedString</strong>
+            <strong>View render at localhost:5000/render/base64encodedString</strong>
+            <hr>
+            <h4> B64 </h4>
             <br>
             <textarea id="generatedBase" name="generatedBase" rows="4" cols="100"></textarea>
             <br>
-            Reloads/iteration are not well supported... some stepping stones:
-            <br>
-            <ol>
-                <li>1. Produce a save-able JSON list. Paste the JSON list into a field and we'll add to it when generating your base64.</li>
-                <li>2. Reload the base64 string into a filled out form</li>
-            </ol>
-            <br>
-            JSON so you can continue with the CLI...:
+            <h4> JSON </h4>
             <br>
             <textarea id="generatedJSON" name="generatedJSON" rows="10" cols="100"></textarea>
+            <br>
+            <button class="btn btn-success" onclick="saveToFile()"> Download JSON </button> 
         </div>  <!-- /div.col-md-12 -->
     </div>  <!-- /div.row -->
 </div>
